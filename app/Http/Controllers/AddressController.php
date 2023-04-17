@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Address;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreAddressRequest;
+use App\Http\Requests\UpdateAddressRequest;
 use Illuminate\Http\Request;
 
 class AddressController extends Controller
@@ -14,6 +16,10 @@ class AddressController extends Controller
     public function index()
     {
         //
+         $addresses = Address::with('island')->get();
+        return response()->json([
+            'addresses' => $addresses
+        ]);
     }
 
     /**
@@ -27,9 +33,13 @@ class AddressController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreAddressRequest $request)
     {
         //
+        $address = Address::create($request->validated());
+        return response()->json([
+            'message' => 'Address Created Successfully',
+        ]);
     }
 
     /**
@@ -51,9 +61,13 @@ class AddressController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Address $address)
+    public function update(UpdateAddressRequest $request, Address $address)
     {
         //
+        $address->update($request->validated());
+        return response()->json([
+            'message' => 'Address Updated Successfully',
+        ]);
     }
 
     /**

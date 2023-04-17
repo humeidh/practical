@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('addresses', function (Blueprint $table) {
+        //lets quickly just addd islands, lateron separate and link to atolls
+        Schema::create('islands', function (Blueprint $table) {
             $table->id();
-            $table->string('house');
-            $table->string('street');
-            $table->foreignId('island_id');
+            $table->string('name');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -26,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('addresses');
+        Schema::dropIfExists('islands');
     }
 };

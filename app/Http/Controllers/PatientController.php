@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Patient;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\StorePatientRequest;
+use App\Http\Requests\UpdatePatientRequest;
 
 class PatientController extends Controller
 {
@@ -14,6 +16,12 @@ class PatientController extends Controller
     public function index()
     {
         //
+       // dd('test');
+        $patients = Patient::with('address.island')->get();
+        return response()->json([
+            'patients' => $patients
+        ]);
+
     }
 
     /**
@@ -27,9 +35,13 @@ class PatientController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePatientRequest $request)
     {
         //
+        $patient = Patient::create($request->validated());
+        return response()->json([
+            'message' => 'Patient Created Successfully',
+        ]);
     }
 
     /**
@@ -51,9 +63,13 @@ class PatientController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Patient $patient)
+    public function update(UpdatePatientRequest $request, Patient $patient)
     {
         //
+        $patient->update($request->validated());
+        return response()->json([
+            'message'=>'Patient Updated Successfully',
+        ]);
     }
 
     /**
@@ -62,5 +78,9 @@ class PatientController extends Controller
     public function destroy(Patient $patient)
     {
         //
+        $patient->delete();
+        return response()->json([
+            'Message'=>'Patient Removed Successfully',
+        ]);
     }
 }
