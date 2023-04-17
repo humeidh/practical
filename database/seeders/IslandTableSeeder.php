@@ -1,9 +1,11 @@
 <?php
 
-namespace Database\Seeders;
 
+namespace Database\Seeders;
+use App\Models\Island;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
 
 class IslandTableSeeder extends Seeder
 {

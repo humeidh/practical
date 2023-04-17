@@ -22,9 +22,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 //api routes related to patient 
 Route::get('/patients',[PatientController::class, 'index']); //done, api works
-Route::post('/patients', [PatientController::class, 'store']); //done, api works
+Route::post('/patients', [PatientController::class, 'store'])->name('storepatient'); //done, api works
 Route::put('/patients/{patient}',[PatientController::class, 'update']);// done tested
 Route::delete('/patients/{patient}',[PatientController::class, 'destroy']);
+Route::put('/patientstatus/{patient}', [PatientController::class, 'statusupdate']);
 
 //api routes related to address
 Route::get('/addresses', [AddressController::class, 'index']);//done api works checked

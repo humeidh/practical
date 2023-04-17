@@ -72,6 +72,13 @@ class PatientController extends Controller
         ]);
     }
 
+    public function statusupdate(Request $request, Patient $patient){
+        $patient->update($request->status);
+        return response()->json([
+            "message" => "status Updated",
+        ]);
+    }
+
     /**
      * Remove the specified resource from storage.
      */
